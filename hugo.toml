@@ -1,0 +1,11 @@
+baseURL = 'https://ashen.yasec.de/'
+locale = 'en-us'
+title = 'The Ashen Open Source HSM Stack'
+theme = 'hugo-book'
+
+copyright = "2026 Jan Sebastian Götte / Yasec"
+enableGitInfo = true
+
+[security.exec]
+allow = ["^rst2html$", "^git$"]
+
