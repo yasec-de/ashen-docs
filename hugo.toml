@@ -9,3 +9,6 @@ enableGitInfo = true
 [security.exec]
 allow = ["^rst2html$", "^git$"]
 
+[params]
+BookTheme = "auto"
+BookSection = "*"
