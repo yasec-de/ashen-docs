@@ -1,0 +1,36 @@
+on: 
+  push:
+    branches:
+      main
+jobs:
+  build:
+    runs-on: docker
+    container:
+      image: hugomods/hugo:exts
+    steps:
+      - run: hugo --minify
+
+  commit: 
+    runs-on: docker
+    container:
+      image: alpine/git
+    steps:
+      # Git configuration
+      - run git config --global user.email ci@infra.yasec.de
+      - run git config --global user.name "Ashen CI"
+      - run git clone -b pages https://$CODEBERG_TOKEN@codeberg.org/$CI_REPO.git $CI_REPO_NAME
+      # Copy build step output to repository folder
+      - run cp -ar public/. $CI_REPO_NAME/
+      # Needed for custom domains
+      - run cp .domains $CI_REPO_NAME || true # Ignore if it doesn't exist
+      # Commit and push all static files with pipeline started timestamp
+      - run cd $CI_REPO_NAME
+      - run git add .
+      - run git commit -m "Ashen Forgejo Actions CI ${CI_COMMIT_SHA}"
+      - run git push
+      - uses: https://codeberg.org/git-pages/action@v2
+        with:
+          site: https://ashen.yasec.de/
+          server: codeberg.page
+          token: ${{ forge.token }}
+          source: _site/
