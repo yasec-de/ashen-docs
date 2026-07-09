@@ -9,13 +9,16 @@ jobs:
   build-and-deploy:
     runs-on: codeberg-tiny-lazy
     container:
-      image: hugomods/hugo:exts
+      image: hugomods/hugo:exts-0.158.0
     steps:
       - name: Checkout source
         uses: https://code.forgejo.org/actions/checkout@v4
         with:
           submodules: recursive
           fetch-depth: 0
+
+      - name: Install docutils for .rst rendering
+        run: apk add --no-cache py3-docutils
 
       - name: Build site
         run: hugo --minify
