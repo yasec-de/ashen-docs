@@ -39,7 +39,8 @@ kernel along the Ashen userspace components. The SBC is connected through UART t
 module running Ashen firmware. The tamper sensor runs the Ashen firmware. On the SBC, the Ashen Linux kernel driver is
 running and communicates with the tamper sensor's firmware through the heartbeat protocol.
 
-The tamper sensor is configured such that its sensing volume covers both the SBC and the tamper sensor itself.
+The tamper sensor is configured such that its sensing volume covers both the SBC and the tamper sensor itself. In this
+document, we refer to the tamper sensor's sensing volume as the *protected volume*.
 
 Lifecycle Model
 ~~~~~~~~~~~~~~~
@@ -73,15 +74,21 @@ Security Model
 Assumptions
 ~~~~~~~~~~~
 
-**Secure Device Commissioning**
+Secure Device Commissioning.
     The Ashen user will assemble, program, configure and arm the device such that it meets all technical specifications,
     and that at the time of arming there are no pre-existing flaws such as compromised hardware components or malicious
     code. See the Commissioning Guide for guidance on achieving thsi in practice.
 
-**Yanartas Tamper Sensors Work**
+Yanartas Tamper Sensors Work.
     The scope of this analysis is the Ashen software stack and the interplay between its Linux and Sensor halves. We
     assume that the tamper sensor detects tampering. If tampering remains undetected, in general the security of the
     system will quickly degrade to that of a system without Ashen (but not worse).
+
+Payload Mechanical Robustness.
+    This analysis assumes the user mechanically constructs the HSM in a way that the attacker cannot destroy a small
+    part of the payload SBC in a targeted way. One way to achieve this is if the payload SBC is enclosed in a robust
+    (e.g. solid steel) enclosure that is inside the protected volume. The attacker is allowed to destroy the payload,
+    just not in a targeted way and without tripping the tamper sensor.
 
 Critical Assets
 ~~~~~~~~~~~~~~~
@@ -118,7 +125,7 @@ The following items must be available at all times, and them becoming unavailabl
 attack.
 
 * The communication link between tamper sensor and Linux kernel module
-* The tamper sensor firmware
+* The tamper sensor firmware must be running at all times so it can respond to tampering attempts.
 
 Data Flows and Trust Boundaries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -128,6 +135,26 @@ Attacker Model
 
 Attacker Capabilities
 ~~~~~~~~~~~~~~~~~~~~~
+
+The attacker is assumed to be able to do the following things.
+
+0. The attacker has access to the full source code, configuration (excluding secrets), and schematics and other CAD data
+   of the system.
+1. The attacker can observe the system from the outside in any region of the electromagnetic (EM) spectrum.
+2. The attacker can perform X-ray and CT imaging of the system.
+3. The attacker can analyze radiated electromagnetic emissions of the system across any surface outside the volume
+   protected by the tamper sensor.
+4. The attacker can analyze conducted EM on any cable entering the protected volume at the volume boundary.
+5. The attacker can perform electromagnetic fault injection attacks against the tamper sensor.
+6. The attacker can perform an on-path attack with the capability to read, delay, block, or modify UART transmissions in
+   either direction.
+7. The attacker can apply state-of-the-art forensic techniques such as those from semiconductor fault analysis to any
+   component of the system in the End of Life phase.
+8. The attacker can interrupt any internal electrical connection inside the protected volume using a contactless laser
+   attack. 
+8. The attacker can create new electrical connections between adjacent conductors on circuit boards inside the protected
+   volume using a contactless laser attack. 
+9. The attacker can selectively destroy the tamper sensor without destroying the SBC payload.
 
 Attacker Types
 ~~~~~~~~~~~~~~
