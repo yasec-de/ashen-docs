@@ -10,6 +10,9 @@ generic setup based on a *typical* Linux Single-Board Computer (SBC) running Ash
 tamper sensor. You can use this threat model as a starting point for tailoring a more comprehensive threat model
 covering your particular use of Ashen.
 
+Scope
+~~~~~
+
 The following parts are in scope for this analysis:
 
 1. The security of the Ashen-equipped kernel itself.
@@ -144,37 +147,48 @@ Attacker Capabilities
 
 The attacker is assumed to be able to do the following things, possibly several of them simultaneously.
 
-0. The attacker has access to the full source code, configuration (excluding secrets), and schematics and other CAD data
+Knowledge and Access
+********************
+
+1. The attacker has access to the full source code, configuration (excluding secrets), and schematics and other CAD data
    of the system. The attacker furthermore has access to identical, devices (though without the target's key material).
-1. The attacker can physically access the system, but cannot mechanically enter the protected volume using tools without
+2. The attacker can physically access the system, but cannot mechanically enter the protected volume using tools without
    tripping the tamper sensor.
-2. The attacker can acccess the system for extended periods of time (up to several months).
-3. The attacker can move the system for small distances up to a kilometer undetected, but cannot move it across larger
+3. The attacker can acccess the system for extended periods of time (up to several months).
+4. The attacker can move the system for small distances up to a kilometer undetected, but cannot move it across larger
    geographical distances undetected.
-4. The attacker has full access to all power and data connections entering the protected envelope, and can disconnect
-   them.
 5. The attacker has full network access to any interfaces exposed over cables entering the protected envelope.
-6. The attacker can observe the system from the outside in any region of the electromagnetic (EM) spectrum. This
+
+Passive Observation
+*******************
+
+1. The attacker can observe the system from the outside in any region of the electromagnetic (EM) spectrum. This
    includes RF, but also optical, and thermal infrared emissions.
-7. The attacker can observe acoustic emissions from the system.
-8. The attacker can manipulate the environmental conditions of the system. This includes temperature, vibration,
+2. The attacker can observe acoustic emissions from the system.
+3. The attacker can perform X-ray and CT imaging of the system.
+4. The attacker can analyze radiated electromagnetic emissions of the system across any surface outside the volume
+   protected by the tamper sensor.
+5. The attacker can perform conducted EM and power side channel analysis on any cable entering the protected volume at
+   the volume boundary.
+
+Active Manipulation
+*******************
+
+1. The attacker has full access to all power and data connections entering the protected envelope, and can disconnect
+   them.
+2. The attacker can manipulate the environmental conditions of the system. This includes temperature, vibration,
    ionizing radiation, magnetic fields.
-9. The attacker can perform X-ray and CT imaging of the system.
-10. The attacker can analyze radiated electromagnetic emissions of the system across any surface outside the volume
-    protected by the tamper sensor.
-11. The attacker can perform conducted EM and power side channel analysis on any cable entering the protected volume at
-    the volume boundary.
-12. The attacker can perform Electromagnetic Fault Injection (EMFI) attacks against the tamper sensor. They cannot
-    perform EMFI against the payload.
-13. The attacker can perform an on-path attack with the capability to read, delay, block, or modify UART transmissions in
-    either direction.
-14. The attacker can apply state-of-the-art forensic techniques such as those from semiconductor fault analysis to any
-    component of the system in the End of Life phase.
-15. The attacker can interrupt any internal electrical connection inside the protected volume using a contactless laser
-    attack. 
-16. The attacker can create new electrical connections between adjacent conductors on circuit boards inside the protected
-    volume using a contactless laser attack. 
-17. The attacker can selectively destroy the tamper sensor without destroying the SBC payload.
+3. The attacker can perform Electromagnetic Fault Injection (EMFI) attacks against the tamper sensor. They cannot
+   perform EMFI against the payload.
+4. The attacker can perform an on-path attack with the capability to read, delay, block, or modify UART transmissions
+   in either direction.
+5. The attacker can apply state-of-the-art forensic techniques such as those from semiconductor fault analysis to any
+   component of the system in the End of Life phase.
+6. The attacker can interrupt any internal electrical connections inside the protected volume using a contactless laser
+   attack. 
+7. The attacker can create new electrical connections between adjacent conductors on circuit boards inside the
+   protected volume using a contactless laser attack. 
+8. The attacker can selectively destroy the tamper sensor without destroying the SBC payload.
 
 Attacker Types
 ~~~~~~~~~~~~~~
