@@ -1,36 +1,35 @@
-on: 
+name: Deploy Hugo site to Codeberg Pages
+
+on:
   push:
     branches:
-      main
+      - main
+
 jobs:
-  build:
+  build-and-deploy:
     runs-on: docker
     container:
       image: hugomods/hugo:exts
     steps:
-      - run: hugo --minify
-
-  commit: 
-    runs-on: docker
-    container:
-      image: alpine/git
-    steps:
-      # Git configuration
-      - run git config --global user.email ci@infra.yasec.de
-      - run git config --global user.name "Ashen CI"
-      - run git clone -b pages https://$CODEBERG_TOKEN@codeberg.org/$CI_REPO.git $CI_REPO_NAME
-      # Copy build step output to repository folder
-      - run cp -ar public/. $CI_REPO_NAME/
-      # Needed for custom domains
-      - run cp .domains $CI_REPO_NAME || true # Ignore if it doesn't exist
-      # Commit and push all static files with pipeline started timestamp
-      - run cd $CI_REPO_NAME
-      - run git add .
-      - run git commit -m "Ashen Forgejo Actions CI ${CI_COMMIT_SHA}"
-      - run git push
-      - uses: https://codeberg.org/git-pages/action@v2
+      - name: Checkout source
+        uses: https://code.forgejo.org/actions/checkout@v4
         with:
-          site: https://ashen.yasec.de/
-          server: codeberg.page
-          token: ${{ forge.token }}
-          source: _site/
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Build site
+        run: hugo --minify
+
+      - name: Push to pages branch
+        env:
+          CODEBERG_TOKEN: ${{ secrets.CODEBERG_TOKEN }}
+        run: |
+          git config --global user.email ci@infra.yasec.de
+          git config --global user.name "Ashen CI"
+          git clone --depth 1 -b pages "https://${CODEBERG_TOKEN}@codeberg.org/${GITHUB_REPOSITORY}.git" pages-out
+          cp -ar public/. pages-out/
+          cp .domains pages-out/ || true   # needed for custom domains
+          cd pages-out
+          git add .
+          git commit -m "Ashen Forgejo Actions CI ${GITHUB_SHA}" || echo "No changes to commit"
+          git push
