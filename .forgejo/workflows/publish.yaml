@@ -36,4 +36,4 @@ jobs:
           site: https://ashen.yasec.de/
           server: codeberg.page
           token: ${{ forge.token }}
-          source: _site/
+          source: public/
