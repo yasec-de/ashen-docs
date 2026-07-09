@@ -139,6 +139,12 @@ attack.
 Data Flows and Trust Boundaries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+The setup described above contains two primary trust boundaries. The exterior boundary lies between the application
+software on the Linux SBC and the outside world. The second, interior trust boundary lies between this application
+software and the tamper sensor. The interior trust boundary is necessary since it allows the Linux SBC to power down
+without compromising the system's security by offloading its root key material to the tamper sensor while the SBC is
+powered off.
+
 Attacker Model
 --------------
 
@@ -190,14 +196,44 @@ Active Manipulation
    protected volume using a contactless laser attack. 
 8. The attacker can selectively destroy the tamper sensor without destroying the SBC payload.
 
-Attacker Types
-~~~~~~~~~~~~~~
+Attacker Motivation
+~~~~~~~~~~~~~~~~~~~
 
 Comparable threat modeling documents for other systems sometimes adopt schemata of attacker types, assigning imaginary
 capabilities to each attacker type describing what they can do and what they cannot. We omit this sort of categorization
 of attacks since it's not very useful. Such taxonomies often result in realistically untenable assumptions like that
 nation-state adversaries cannot have their spies apply for jobs at a target organization, or that hacker catgirls do not
 have access to focused ion beam rework stations.
+
+Instead of this taxonomical approach, we propose some scenarios illustrating why an attacker may be willing to expend
+resources ot attach an Ashen-based HSM.
+
+Scenario 1: Activist Video Conference Server
+********************************************
+
+In this scenario, an activist group operating in a hostile state runs a standard video conference software on the
+HSM-protected Linux SBC. The protection goal of the system is to prevent corrupt police forces from compromising the
+video conference system and gaining access to communication contents and participant metadata. 
+
+Scenario 2: Device Factory Certificate Signing Provider
+*******************************************************
+
+In this scenario, a hardware designer provisions a HSM-protected Linux SBC inside of a third-party factory. The system
+contains an asymmetric private key that application software running on it uses to provide device authenticity
+certificates for devices manufactured in the factory. The system furthermore creates an authenticated audit log of all
+issued certificates that the hardware designer can use to assure compliance of the factory with production quota.
+Attackers in this scenario include malicious third parties attempting to compromise the manufactured devices. The range
+of relevant attackers further includes the operators of the factory, who may be incentivized to run a third shift,
+producing excess devices and selling them through illicit channels without the hardware designer's knowledge.
+
+Scenario 3: Software Release Signing Server
+*******************************************
+
+In this scenario, a volunteer-run Linux distribution builds binary software packages for their package repositories. At
+the end of the build process, the binary packages are signed to attest to their authenticity when users download them
+from a swarm of mirror servers. The volunteer group uses some custom-built software running on a HSM-protected Linux SBC
+to generate these signatures while also keeping a tamper-proof audit log. Attackers in this scenario would be
+cybercriminals or nation-state adversaries attempting to compromise build artifacts.
 
 Attack Trees
 ------------
