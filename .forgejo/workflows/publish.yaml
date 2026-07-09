@@ -7,9 +7,9 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: codeberg-tiny-lazy
+    runs-on: codeberg-tiny
     container:
-      image: hugomods/hugo:exts-0.158.0
+      image: hugomods/hugo:exts
     steps:
       - name: Checkout source
         uses: https://code.forgejo.org/actions/checkout@v4
