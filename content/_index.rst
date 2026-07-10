@@ -76,9 +76,11 @@ Right now, jaseg_ is implementing the software components described above. When 
 November 2026, they will proceed building the Yanartas_ tamper sensor reference hardware. Future work based on this
 reference hardware incudes:
 
-1. Integrating Ashen/Yanartas with UEFI Secure Boot
+1. Integrating Ashen/Yanartas with UEFI Secure Boot by implementing a TPM-compatible API
 2. Creating a set of hardware variants at different points along the security/convenience spectrum
 3. Building a ready-to-use reference platform that integrates Yanartas with a Raspberry Pi Compute Module 5
+4. Implementing a PKCS11 API on the Ashen/Yanartas tamper sensor
+5. Implementing remote attestation support
 
 .. _`1981 lecture on US communications security`: https://archive.org/details/history_comsec_ii-nsa/history_comsec_ii-ISCAP
 .. _jaseg: https://jaseg.de/

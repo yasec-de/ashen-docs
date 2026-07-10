@@ -206,7 +206,9 @@ nation-state adversaries cannot have their spies apply for jobs at a target orga
 have access to focused ion beam rework stations.
 
 Instead of this taxonomical approach, we propose some scenarios illustrating why an attacker may be willing to expend
-resources ot attach an Ashen-based HSM.
+resources ot attach an Ashen-based HSM. Common to these scenarios is that the HSM may be located in a data center or
+other facility outside of its operator's immediate physical access, and as such attackers may have physical access to
+the device for extended periods of time.
 
 Scenario 1: Activist Video Conference Server
 ********************************************
