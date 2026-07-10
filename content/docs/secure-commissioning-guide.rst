@@ -49,10 +49,18 @@ few components on the way to the victim.
 Assembly
 ~~~~~~~~
 
+The final assembly step, putting together the payload SBC, the tamper sensor, and the enclosure is the most critical.
+An adversary could easily hide a large hardware implant during this step or possibly reprogram some components. After
+final assembly is complete, it would be very difficult or even impossible to detect alterations inside the protected
+volume given that the tamper sensor is precisely designed to prevent that. For this reason, we strongly recommend
+having a trusted person do at least this last integration step in house.
+
 Programming
 ~~~~~~~~~~~
 
-
+When programming the components of the system such as the tamper sensor or the SBC, make sure to verify the authenticity
+of the firmware components. Ashen release files will be signed with the Ashen release minisign signing key
+``RWSRQCXFI1uwYjctpVYY3DfkuAili0cpjoIcKyhaRrwOGgicUX3oOTQt``.
 
 Initial Trust Establishment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
