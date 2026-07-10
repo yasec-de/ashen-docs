@@ -6,16 +6,45 @@ In Ashen's security model, the *commissioning* of the system, i.e. acquiring, as
 its components, is explicitly out of scope and up to you, the user. This guide will help you get to a secure Ashen
 setup. It highlights what you need to keep in mind, and which steps are the most likely to result in a security problem.
 
+{{< hint info >}}
+    There is no absolute security, especially in hardware. A sufficiently determined and well-funded attacker will be
+    able to overpower any defence you mount, even if just by sheer luck, tenancy, or brute force. However, by
+    implementing all of these suggestions, you can make it a lot more annoying and much more expensive for an attacker
+    to achieve their goals, and thus discourage attacks before they happen.
+{{< /hint >}}
+
 Executive Summary
 -----------------
 
-
+* Make sure your IT infrastructure is airtight.
+* Keep your supply chains short and trustworthy. Avoid sketchy stops in your component's journey to you.
+* Verify hashes and signatures of software downloads. 
+* Do the final assembly and programming in house.
 
 Hardware Assembly
 -----------------
 
 Component Procurement
 ~~~~~~~~~~~~~~~~~~~~~
+
+Depending on the kinds of adversaries you are facing, you may need to consider supply-chain attacks. There's no one way
+to fully prevent them, but there are some things you can do to make them much more difficult to implement in practice. A
+basic assumption we make here is that unless we all are exceptionally unlucky, an attacker likely will not have a
+backdoor pre-installed into all components of a type such as SBC or microcontroller. Instead, we estimate it's
+reasonable to assume that the most likely supply-chain attack will be *targeted*, with the attacker modifying one or a
+few components on the way to the victim.
+
+* Make sure your vendors are trustworthy. Ideally, ask around for recommendations or stick to well-known component
+  vendors.
+* Check incoming components and their packaging against previous shipments. Verify part markings match the datasheet.
+  Check that the packaging is complete and that its inner layers are undamaged. Check that identical parts weigh the
+  same.
+* Prefer sourcing critical components like SoMs or complex ICs like microcontrollers in ways that are harder to predict,
+  and thus harder to intercept for attackers. A really solid way of achieving this is to physically go to a store and
+  buy the necessary components. Where that's not possible, consider obscuring the final destination of the components
+  when online shopping as long as that doesn't put you into trouble with export compliance laws.
+* Try to avoid problematic jurisdictions ending up on the transit route of your packages.
+* Keep your supply chains short and be wary of good deals.
 
 Assembly
 ~~~~~~~~

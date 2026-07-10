@@ -276,4 +276,4 @@ in time, we do consider that a successful attack.
 Attack Trees
 ------------
 
-.. _`Commissioning Guide`: secure-commissioning-guide.rst
+.. _`Commissioning Guide`: ../secure-commissioning-guide
