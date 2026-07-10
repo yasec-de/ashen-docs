@@ -44,5 +44,8 @@ handshake. Only once the handshake is complete, does the heartbeat protocol star
 protocol maps one heartbeat protocol message to one noise protocol message. After every transmitted message in either
 direction, the corresponding direction key's ``REKEY`` function is called as described in the Noise specification.
 
+Higher-Level Protocol
+---------------------
+
 .. _`Noise protocol`: https://noiseprotocol.org/noise.html
 .. _`Noise Protocol specification`: https://noiseprotocol.org/noise.html
