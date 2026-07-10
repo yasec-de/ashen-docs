@@ -2,6 +2,9 @@
 title: "Heartbeat Protocol Specification"
 ---
 
+Protocol Stack
+--------------
+
 The ashen heartbeat protocol serves multiple purposes. It enables the payload system and the tamper sensor to ascertain
 each other's cryptographic identity. Further, it allows the payload to continuously monitor the tamper sensor's state to
 ensure secrets within the payload are quickly deleted when the sensor detects a tampering attempt. Finally, it serves as
@@ -24,17 +27,22 @@ are Curve25519 for Diffie-Hellman operations, ChaCha20/Poly1305 for Authenticate
 Derivation Function (HKDF). The name of this Noise protocol according to the `Noise protocol specification`_ is
 ``Noise_XX_25519_ChaChaPoly_BLAKE2s``.
 
+{{< hint info >}}
+    Right now, the protocol is not post-quantum secure as it relies on Noise's standard Diffie-Hellman primitive using
+    the X25519 elliptic curve. A transition to <a href="https://eprint.iacr.org/2022/539">Post Quantum
+    Noise (PQNoise)</a> is planned for a later protocol revision.
+{{< /hint >}}
+
 The ``XX`` Noise pattern has both parties contribute an ephemeral key as well as a static long-term identity key to the
 connection. In this pattern, both parties transmit their static long-term identity public keys to each other, enabling
 trust on first use (TOFU) without the need to transmit the keys out of band. Note that despite this, the protocol is
 still identity hiding to a passive observer. Because ephemeral keys are used, the protocol provides forward secrecy from
 one handshake to the next.
 
-{{< hint info >}}
-    Right now, the protocol is not post-quantum secure as it relies on Noise's standard Diffie-Hellman primitive using
-    the X25519 elliptic curve. A transition to <a href="https://eprint.iacr.org/2022/539">Post Quantum
-    Noise (PQNoise)</a> is planned for a later protocol revision.
-{{< /hint >}}
+The heartbeat protocol does not transmit any encrypted payload data or any associated data during the Noise protocol
+handshake. Only once the handshake is complete, does the heartbeat protocol start exchanging messages. The heartbeat
+protocol maps one heartbeat protocol message to one noise protocol message. After every transmitted message in either
+direction, the corresponding direction key's ``REKEY`` function is called as described in the Noise specification.
 
 .. _`Noise protocol`: https://noiseprotocol.org/noise.html
 .. _`Noise Protocol specification`: https://noiseprotocol.org/noise.html
