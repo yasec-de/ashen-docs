@@ -109,29 +109,43 @@ encryption keys listed below.
 Confidentiality
 ***************
 
-The following items must be protected from being disclosed to the attacker.
+The following items must be protected from being disclosed to the attacker. A succcessful attack is one where the
+attacker gains at least partial knowledge of one of these secrets.
 
 * Heartbeat connection keys in the Yanartas sensor: Long-term an ephemeral asymmetric keys and the ephemeral symmetric encryption key
 * Corresponing to the above, heartbeat connection keys on the running SBC
 * Any user keys stored in the Yanartas sensor
 * Full Disk Encryption (FDE) working keys located in CPU registers and main memory on the running SBC
-* Plaintext user data sitting in main memory caches on the running SBC
+* Plaintext user data sitting in main memory caches on the running SBC. Note that here attack success only encompasses
+  access outside of what is otherwise public knowledge or ordinarily available through the user application.
 
 Integrity
 *********
 
 The following items can safely be disclosed to the attacker, but must be protected against modifications by the
-attacker.
+attacker. Attack success is defined by the attacker at least changing the target information.
 
 * The tamper sensor firmware
 * The SBC Software
-* The communication link between tamper sensor and Linux kernel module
+* The plaintext payload of the communication link between tamper sensor and Linux kernel module
 
 Availability
 ************
 
 The following items must be available at all times, and them becoming unavailable should be considered equal to an
-attack.
+attack. Attack success is defined as the attacker compromising availability undetected, i.e without triggering a tampre
+alarm, for a period greater than the system's heartbeat protocol timeout.
+
+{{< hint warning >}}
+    As a concept of this model, the attacker <emph>is allowed</emph> to temporarily disturb availability for a period up
+    to the system's heartbeat protocol timeout, which is typically in the dozens of milliseconds. The practical
+    consequences of this are minimal, as this time is deliberately kept short to prevent the attacker from mounting a
+    successful physical attack in the meantime. Furthermore, for typical networked applications, the system's heartbeat
+    protocol timeout will likely be in the same order of magnitude as unavoidable network latency. However, this timeout
+    constitutes what is essentially a metastable period in the system's integrity state. In certain highly
+    time-sensitive applications such as fast blockchain or other distributed systems, it may be useful to delay some
+    actions until a confirmation period greater than this heartbeat timeout has passed.
+{{< /hint >}}
 
 * The communication link between tamper sensor and Linux kernel module
 * The tamper sensor firmware must be running at all times so it can respond to tampering attempts.
@@ -236,6 +250,12 @@ the end of the build process, the binary packages are signed to attest to their 
 from a swarm of mirror servers. The volunteer group uses some custom-built software running on a HSM-protected Linux SBC
 to generate these signatures while also keeping a tamper-proof audit log. Attackers in this scenario would be
 cybercriminals or nation-state adversaries attempting to compromise build artifacts.
+
+Attack Success
+~~~~~~~~~~~~~~
+
+We define a successful attack as one where the attacker manages to compromise one of the `Critical Assets`_ defined
+above. In case of the  
 
 Attack Trees
 ------------

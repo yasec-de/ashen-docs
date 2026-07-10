@@ -23,6 +23,8 @@ Assembly
 Programming
 ~~~~~~~~~~~
 
+
+
 Initial Trust Establishment
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
@@ -30,7 +32,7 @@ After the system has been build and programmed, it has to be booted once to gene
 what happens during this first boot:
 
 1. Both the Linux SBC and the tamper sensor generate their long-term heartbeat protocol identity keys.
-2. The Linux SBC generates keys for full-disk encryption and formats its storage with them. 
+2. The Linux SBC generates keys for full-disk encryption and formats its storage with them.
 3. The Linux SBC and the tamper sensor complete a first heartbeat protocol handshake, and store each other's long-term
    identity keys.
 4. The Linux SBC prints the static handshake protocol identity key fingerprints of both itself and of the tamper sensor
