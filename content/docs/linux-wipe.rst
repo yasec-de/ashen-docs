@@ -77,7 +77,25 @@ the second pass of erasing all memory from start to end. This piece of software,
 separate because the kdump mechanism is a clean way of getting code running with direct access to the full physical RAM
 through a flat mapping.
 
+{{< hint info >}}
+    We wrote above that the wipe payload sees all of main memory through a flat mapping. There is one small caveat to
+    this. Many ARM-based SBCs have a small operating system running in the ARM processor's TrustZone (TZ) facility.
+    TrustZone is a technology for running isolated code next to an operating system on the same CPU. It is in essence a
+    virtualization technology similar to conventional hypervisors.
+
+    ARM System-on-Chip (SoC) makers as well as SBC designers often use TZ to handle hardware housekeeping tasks. In
+    these cases, a small amount of firmware is continuously sharing the same CPU cores with the Linux host operating
+    system. This firmware is designed to only minimally interact with the Linux host operating system, and partitions
+    off its own memory areas both in SoC-internal memory and in the system's DRAM.
+
+    This memory partitioning happens in the background, and is invisble to the Linux kernel. As a result, the view the
+    Linux kernel has on main memory is technically incomplete, as there may be small memory areas that are used by TZ
+    and that are invisble to the Linux kernel. In our design, this circumstance is of no consequence since these TZ
+    memory areas should never contain user secrets.
+{{< /hint >}}
+
 .. _`Halt and Catch Fire`: https://en.wikipedia.org/wiki/Halt_and_Catch_Fire_(computing)
 .. _memfd_secret: https://man7.org/linux/man-pages/man2/memfd_secret.2.html
 .. _`Kernel Panic`: https://en.wikipedia.org/wiki/Kernel_panic
 .. _kdump: https://www.kernel.org/doc/html/latest/admin-guide/kdump/kdump.html
+.. _TrustZone: https://www.arm.com/technologies/trustzone-for-cortex-a

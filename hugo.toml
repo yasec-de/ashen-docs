@@ -3,7 +3,7 @@ locale = 'en-us'
 title = 'The Ashen Open Source HSM Stack'
 theme = 'hugo-book'
 
-copyright = "2026 Jan Sebastian Götte / Yasec"
+copyright = "© 2026 Jan Sebastian Götte / Yasec. Some rights reserved. CC-BY-SA"
 enableGitInfo = true
 
 [security.exec]
