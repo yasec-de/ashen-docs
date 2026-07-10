@@ -125,9 +125,9 @@ Integrity
 The following items can safely be disclosed to the attacker, but must be protected against modifications by the
 attacker. Attack success is defined by the attacker at least changing the target information.
 
-* The tamper sensor firmware
-* The SBC Software
-* The plaintext payload of the communication link between tamper sensor and Linux kernel module
+* The tamper sensor firmware.
+* The SBC Software.
+* The plaintext payload of the communication link between tamper sensor and Linux kernel module.
 
 Availability
 ************
@@ -147,8 +147,13 @@ alarm, for a period greater than the system's heartbeat protocol timeout.
     actions until a confirmation period greater than this heartbeat timeout has passed.
 {{< /hint >}}
 
-* The communication link between tamper sensor and Linux kernel module
+These items are covered by our availability requirement:
+
+* The communication link between tamper sensor and Linux kernel module must be available.
 * The tamper sensor firmware must be running at all times so it can respond to tampering attempts.
+* We do not consider intentional triggering of the tamper alarm by an attacker with physical access to the device a
+  successful attack. However, we consider it an attack if the attacker is able to trigger the alarm *without* physical
+  access.
 
 Data Flows and Trust Boundaries
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -182,6 +187,8 @@ Knowledge and Access
 Passive Observation
 *******************
 
+All of these attack methods require physical access to the device.
+
 1. The attacker can observe the system from the outside in any region of the electromagnetic (EM) spectrum. This
    includes RF, but also optical, and thermal infrared emissions.
 2. The attacker can observe acoustic emissions from the system.
@@ -193,6 +200,8 @@ Passive Observation
 
 Active Manipulation
 *******************
+
+All of these attack methods require physical access to the device.
 
 1. The attacker has full access to all power and data connections entering the protected envelope, and can disconnect
    them.
@@ -255,7 +264,14 @@ Attack Success
 ~~~~~~~~~~~~~~
 
 We define a successful attack as one where the attacker manages to compromise one of the `Critical Assets`_ defined
-above. In case of the  
+above. Depending on the asset, that means for instance disclosure of a secret or denial of service.
+
+{{< hint info >}}
+We consider triggering of the tamper alarm a failed attack. We do not consider the trivial denial of service of an
+attacker intentionally triggering the tamper alarm a successful attack if the attacker has physical access to the
+system. However, if the attacker can trigger the tamper alarm remotely *without* having had phsical access at any point
+in time, we do consider that a successful attack.
+{{< /hint >}}
 
 Attack Trees
 ------------
