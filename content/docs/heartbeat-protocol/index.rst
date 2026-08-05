@@ -11,6 +11,12 @@ ensure secrets within the payload are quickly deleted when the sensor detects a 
 the cryptographically secured transport layer for any higher level cryptographic functions such as key management
 services that the tamper sensor may provide to the payload.
 
+.. figure:: Ashen\ Protocol\ Stack.drawio.svg
+   :alt: Protocol stack diagram with four layers from text below
+   :width: 30em
+   
+   The Ashen Protocol Stack
+
 The protocol is canonically spoken over a UART serial connection. This choice was made since for the protocol's intended
 use, larger bandwidth than an UART can provide is not needed, and an UART is maximally compatible with microcontrollers
 and other platforms that could be used as the base of a tamper sensor. The canonical UART settings for the protocol are
@@ -18,8 +24,12 @@ and other platforms that could be used as the base of a tamper sensor. The canon
 
 On top of the raw UART interface, the protocol uses COBS to provide framing. Packets are encoded using COBS, and packets
 must be terminated by a null byte. The terminating null byte must be sent as soon as the COBS-encoded packet is sent,
-and should not be delayed until the next packet is sent. Inserting additional null bytes in between packets is
-acceptable as it may be useful for synchronization.
+and should not be delayed until the next packet is sent.
+
+Empty COBS frames (i.e. two null bytes immedately after one another) are acceptable and are silently ignored. When a
+sequence of at least 8 null bytes in a row is observed, this sequence is interpreted as a *protocol reset*. During a
+protocol reset, the noise and application protocol layers are reset to their power-on state. An active noise connection
+is discarded, new ephemeral keys are generated, and the application-layer peer identity is reset.
 
 On top of COBS, the protocol uses the `Noise protocol`_ using the ``XX`` pattern. The chosen cryptographic primitives
 are Curve25519 for Diffie-Hellman operations, ChaCha20/Poly1305 for Authenticated Encryption with Associated Data
@@ -41,8 +51,7 @@ one handshake to the next.
 
 The heartbeat protocol does not transmit any encrypted payload data or any associated data during the Noise protocol
 handshake. Only once the handshake is complete, does the heartbeat protocol start exchanging messages. The heartbeat
-protocol maps one heartbeat protocol message to one noise protocol message. After every transmitted message in either
-direction, the corresponding direction key's ``REKEY`` function is called as described in the Noise specification.
+protocol maps one heartbeat protocol message to one noise protocol message.
 
 Higher-Level Protocol
 ---------------------

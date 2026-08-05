@@ -1,0 +1,22 @@
+<mxfile host="app.diagrams.net">
+  <diagram name="Page-1" id="z89sPQQ4JVux4quAQSav">
+    <mxGraphModel dx="589" dy="331" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="kkKGbhWoVwtaXwzSWL2k-1" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#EA6B66;" value="&lt;div&gt;&lt;b&gt;UART&lt;/b&gt;&lt;/div&gt;&lt;div&gt;8n1 1 MBd&lt;/div&gt;" vertex="1">
+          <mxGeometry height="40" width="250" x="340" y="450" as="geometry" />
+        </mxCell>
+        <mxCell id="kkKGbhWoVwtaXwzSWL2k-2" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#EA6B66;" value="&lt;div&gt;&lt;b&gt;COBS&lt;/b&gt;&lt;/div&gt;&lt;div&gt;Framing&amp;nbsp;+ Reset&lt;/div&gt;" vertex="1">
+          <mxGeometry height="40" width="250" x="340" y="410" as="geometry" />
+        </mxCell>
+        <mxCell id="kkKGbhWoVwtaXwzSWL2k-3" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#EA6B66;" value="&lt;div&gt;&lt;b&gt;Noise XX&lt;/b&gt;&lt;/div&gt;&lt;div&gt;Curve25519 / ChaChaPoly1305 / SHA-256&lt;/div&gt;" vertex="1">
+          <mxGeometry height="40" width="250" x="340" y="370" as="geometry" />
+        </mxCell>
+        <mxCell id="kkKGbhWoVwtaXwzSWL2k-4" parent="1" style="rounded=0;whiteSpace=wrap;html=1;strokeColor=#EA6B66;" value="&lt;b&gt;Ashen Heartbeat&lt;/b&gt;" vertex="1">
+          <mxGeometry height="40" width="250" x="340" y="330" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
