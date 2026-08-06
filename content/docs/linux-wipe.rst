@@ -42,8 +42,13 @@ Selecting Secrets to Wipe
 ~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Ashen selects the targets to wipe in the first, high-priority stage by hooking into several standard Linux APIs. First,
-any Linux kernel keyrings are erase. These keyrings include the full disk encryption keys for any unlocked encrypted
+any Linux kernel keyrings are erased. These keyrings include the full disk encryption keys for any unlocked encrypted
 disks.
+
+{{< hint warning >}}
+    Currently, only software full disk encryption keys are wiped. Keys stored in special-purpose registers of inline
+    disk encryption accelerator hardware are not currently supported.
+{{< /hint >}}
 
 After wiping the kernel keyrings, Ashen will proceed with erasing userspace memory that applications have explicitly
 marked as containing secrets using the kernel's standard memfd_secret_ system. Applications don't currently mark secret
@@ -93,6 +98,8 @@ through a flat mapping.
     and that are invisble to the Linux kernel. In our design, this circumstance is of no consequence since these TZ
     memory areas should never contain user secrets.
 {{< /hint >}}
+
+
 
 .. _`Halt and Catch Fire`: https://en.wikipedia.org/wiki/Halt_and_Catch_Fire_(computing)
 .. _memfd_secret: https://man7.org/linux/man-pages/man2/memfd_secret.2.html

@@ -13,7 +13,7 @@ services that the tamper sensor may provide to the payload.
 
 .. figure:: Ashen\ Protocol\ Stack.drawio.svg
    :alt: Protocol stack diagram with four layers from text below
-   :width: 30em
+   :width: 20em
    
    The Ashen Protocol Stack
 
@@ -27,9 +27,9 @@ must be terminated by a null byte. The terminating null byte must be sent as soo
 and should not be delayed until the next packet is sent.
 
 Empty COBS frames (i.e. two null bytes immedately after one another) are acceptable and are silently ignored. When a
-sequence of at least 8 null bytes in a row is observed, this sequence is interpreted as a *protocol reset*. During a
-protocol reset, the noise and application protocol layers are reset to their power-on state. An active noise connection
-is discarded, new ephemeral keys are generated, and the application-layer peer identity is reset.
+sequence of at least 24 null bytes in a row is observed, this sequence is interpreted as a *protocol reset* and the
+noise and application protocol layers are reset to their power-on state. An active noise connection is discarded, new
+ephemeral keys are generated, and the application-layer peer identity is reset.
 
 On top of COBS, the protocol uses the `Noise protocol`_ using the ``XX`` pattern. The chosen cryptographic primitives
 are Curve25519 for Diffie-Hellman operations, ChaCha20/Poly1305 for Authenticated Encryption with Associated Data
@@ -55,6 +55,41 @@ protocol maps one heartbeat protocol message to one noise protocol message.
 
 Higher-Level Protocol
 ---------------------
+
+.. figure:: protocol\ state\ machine.drawio.svg
+   :alt: State machine state diagram of the ashen firmware.
+   :width: 50em
+   
+   Ashen firmware protocol state diagram. Normal operating flow highlighted in green, initial setup in blue, error paths
+   in red.
+
+The high-level ashen heartbeat protocol consists of typed messages exchanged through noise-encrypted COBS frames. The
+diagram above shows the firmware protocol state machine starting from desynchronized (power up) state.
+
+During normal protocol operation, the states and transitions highlighted in green are traversed. When the host connects
+to the firmware for the first time, the pairing sequence highlighted in blue is executed after the noise link has been
+established. The pair command in this sequence makes the firmware store the host's long-term (static) identity key and
+mark the connection trusted. On the next connection, the firmware will recognize the host during the handshake. In this
+case, when the host requests the device's status after the handshake is done, the device will respond with both the
+``is_keyed`` and ``peer_trusted`` flags set. ``is_keyed`` indicates that the firmware has trusted *some* host, and is
+not just unprogrammed. ``peer_trusted`` indicates that the firmware has recognized the host's long-term identity key and
+that it will respond to other protocol commands.
+
+If the firmware does not recognize the host's long-term identity key during the handshake, it will still allow the
+handshake to proceed, but it will respond with ``peer_trusted`` unset and will only accept ``erase``, ``status`` and
+``disconnect`` commands. To recover access to such a device, the host can ``erase`` it, destroying all key material
+inside as well as unlinking the previous host key. After the ``erase`` is complete, the device returns to ``Unpaired``
+state from which the host can then issue the ``pair`` command.
+
+The diagram below shows the normal message flow during an ashen connection. The host starts sending heartbeat requests
+as soon as the protocol's connection phase has been completed. Like most other messages, heartbeat requests are always
+initiated by the host. The host is responsible for scheduling them.
+
+.. figure:: protocol\ sequence\ diagram.drawio.svg
+   :alt: UML-style sequence diagram of the communication between the ashen host kernel driver and the ashen firmware.
+   :width: 50em
+   
+   Ashen protocol sequence diagram
 
 .. _`Noise protocol`: https://noiseprotocol.org/noise.html
 .. _`Noise Protocol specification`: https://noiseprotocol.org/noise.html
