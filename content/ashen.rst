@@ -17,12 +17,11 @@ Ashen is designed to run on commodity hardware with the help of a Yanartas_ tamp
 Project state
 -------------
 
-{{< hint warning >}}
-   Ashen is currently work in progress! It works, but it's at an alpha prototype stage. <a
-   href="https://jaseg.de/">jaseg</a> is working on it full time, and we are planning a first release for January 2027.
-   We're open for collaborations and contributions--feel free to reach out via <a
-   href="mailto:ashen@yasec.de">email</a>.
-{{< /hint >}}
+.. important::
+
+   Ashen is currently work in progress! It works, but it's at an alpha prototype stage. jaseg_ is working on it full
+   time, and we are planning a first release for January 2027. We're open for collaborations and contributions—feel free
+   to reach out via `email <mailto:ashen@yasec.de>`__.
 
 How do HSMs work
 ----------------
@@ -73,6 +72,9 @@ An Ashen HSM is made up from the following parts:
   microcontroller connected to a Linux computer to use it as a tamper sensor.
 * In the Yanartas_ project, we are building purpose-made advanced tamper sensors that are designed to run
   ashen-firmware.
+* The `Yanartas Pillowbox Generator`_ automatically creates flexible printed circuit (FPC) layouts for security meshes
+  that fold up like a `Pillow Box`_. The project is listed here because it's not by itself hardware, but a pure software
+  toolchain.
 
 Project Roadmap
 ===============
@@ -82,10 +84,11 @@ parallel on the first release of ashen, and on the first Yanartas_ tamper sensor
 
 .. _`1981 lecture on US communications security`: https://archive.org/details/history_comsec_ii-nsa/history_comsec_ii-ISCAP
 .. _jaseg: https://jaseg.de/
-.. _Yanartas: https://nlnet.nl/project/Yanartas/
 .. _`fault injection`: https://tches.iacr.org/index.php/TCHES/article/view/7390/6562
 .. _probing: https://tches.iacr.org/index.php/TCHES/article/view/11802
-.. _ashen-linux: https://git.yasec.org/yasec/ashen-linux
-.. _ashen-firmware: https://git.yasec.org/yasec/ashen-fw
-.. _ashen-library: https://git.yasec.org/yasec/ashen-library
-.. _Yanartas: ./yanartas
+.. _ashen-linux: https://git.yasec.de/yasec/ashen-linux
+.. _ashen-firmware: https://git.yasec.de/yasec/ashen-fw
+.. _ashen-library: https://git.yasec.de/yasec/ashen-library
+.. _Yanartas: ../yanartas
+.. _`Pillow Box`: https://arxiv.org/html/2410.17593v1
+.. _`Yanartas Pillowbox Generator`: https://git.yasec.de/yasec/yanartas-pillowbox-generator

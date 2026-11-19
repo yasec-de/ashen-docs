@@ -69,6 +69,6 @@ reference hardware includes:
 .. _Yanartas: https://nlnet.nl/project/Yanartas/
 .. _`fault injection`: https://tches.iacr.org/index.php/TCHES/article/view/7390/6562
 .. _probing: https://tches.iacr.org/index.php/TCHES/article/view/11802
-.. _ashen-linux: https://git.yasec.org/yasec/ashen-linux
-.. _ashen-firmware: https://git.yasec.org/yasec/ashen-fw
-.. _ashen-library: https://git.yasec.org/yasec/ashen-library
+.. _ashen-linux: https://git.yasec.de/yasec/ashen-linux
+.. _ashen-firmware: https://git.yasec.de/yasec/ashen-fw
+.. _ashen-library: https://git.yasec.de/yasec/ashen-library
