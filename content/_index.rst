@@ -1,24 +1,6 @@
 ---
-title: "The Ashen Open Source HSM Stack"
+title: "Ashen/Yanartas"
 ---
-
-What is Ashen?
-==============
-
-In the work-in-progress Ashen project, we create a fully open source software and hardware stack for building open
-source Hardware Security Modules (HSMs). A HSM is a computer that is protected against advanced hardware attacks such as
-probing_ and `fault injection`_ attacks. Up to now, HSMs are only used in niche applications because they are expensive
-to buy and difficult to program. The goal of Ashen is to make it so that anyone with a basic technical understanding can
-build their own HSM and protect their data from advanced attacks.
-
-Project state
--------------
-
-{{< hint warning >}}
-   Ashen is currently work in progress! Nothing works yet. <a href="https://jaseg.de/">jaseg</a> is working on it full
-   time and we expect first usable results around November 2026. We're open for collaborations and contributions--feel
-   free to reach out via <a href="mailto:ashen@yasec.de">email</a>.
-{{< /hint >}}
 
 How do HSMs work
 ----------------
@@ -87,6 +69,6 @@ reference hardware includes:
 .. _Yanartas: https://nlnet.nl/project/Yanartas/
 .. _`fault injection`: https://tches.iacr.org/index.php/TCHES/article/view/7390/6562
 .. _probing: https://tches.iacr.org/index.php/TCHES/article/view/11802
-.. _ashen-linux: https://codeberg.org/yasec/ashen-linux
-.. _ashen-firmware: https://codeberg.org/yasec/ashen-fw
-.. _ashen-library: https://codeberg.org/yasec/ashen-library
+.. _ashen-linux: https://git.yasec.org/yasec/ashen-linux
+.. _ashen-firmware: https://git.yasec.org/yasec/ashen-fw
+.. _ashen-library: https://git.yasec.org/yasec/ashen-library
