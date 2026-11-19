@@ -108,7 +108,6 @@ board uses the first four out of the six mesh segments on the the the ``FFC-30P-
 
 **Status:** Prototypes finished and confirmed working.
 
-
 warp: TDR Prototype
 -------------------
 
