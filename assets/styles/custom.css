@@ -1,0 +1,31 @@
+
+/* Workaround support until hugo-book has proper support for rst callouts */
+
+.markdown .admonition {
+  --accent-color: var(--color-accent-default);
+  position: relative;
+  margin: var(--space-16) 0;
+  padding: var(--space-8) var(--space-16);
+  border-radius: var(--border-radius);
+  background-color: color-mix(in srgb, var(--accent-color) 10%, var(--body-background));
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0; bottom: 0; left: 0;
+    width: var(--space-4);
+    border-radius: var(--border-radius);
+    background: var(--accent-color);
+  }
+
+  &.note                 { --accent-color: var(--color-accent-note); }
+  &.tip, &.hint          { --accent-color: var(--color-accent-tip); }
+  &.important            { --accent-color: var(--color-accent-important); }
+  &.warning, &.attention { --accent-color: var(--color-accent-warning); }
+  &.caution              { --accent-color: var(--color-accent-caution); }
+  &.danger, &.error      { --accent-color: var(--color-accent-danger); }
+
+  > :first-child { margin-top: 0; }
+  > :last-child  { margin-bottom: 0; }
+  .admonition-title { font-weight: bold; }
+}
