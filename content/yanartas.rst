@@ -87,8 +87,8 @@ are laid out in a `paper <tdr-paper_>`_ published by project lead jaseg_ during 
 The Yanartas Designs
 ====================
 
-unoq-baseline: Yanartas Unoq Demo Mesh Adapter
-----------------------------------------------
+`unoq-baseline: Yanartas Unoq Demo Mesh Adapter <unoq-baseline-repo_>`_
+-----------------------------------------------------------------------
 
 `unoq-baseline` is a really simple design that allows connecting two Tamper-Sensing Meshes or other tamper sensors to an
 Arduino Uno Q Linux Single-Board Computer. The Uno Q already contains a powerful STM32U585_ microcontroller that is
@@ -108,8 +108,8 @@ board uses the first four out of the six mesh segments on the the the ``FFC-30P-
 
 **Status:** Prototypes finished and confirmed working.
 
-warp: TDR Prototype
--------------------
+`warp: TDR Prototype <warp-repo_>`_
+-----------------------------------
 
 `warp` is a TDR-only sensor board prototype with a carrier board designed to take a Raspberry Pi Compute Module 5.
 `warp` does not include any other tamper sensors and is meant for development of the TDR sensing frontend and firmware.
@@ -141,3 +141,5 @@ continuity/short only mesh sensing connectors, which are simply passed through t
 .. _ashen-firmware: https://git.yasec.de/yasec/ashen-firmware
 .. _ashen-library: https://git.yasec.de/yasec/ashen-library
 .. _`Yanartas Pillowbox Generator`: https://git.yasec.de/yasec/yanartas-pillowbox-generator
+.. _warp-repo: https://git.yasec.de/yasec/yanartas-warp
+.. _unoq-baseline-repo: https://git.yasec.de/yasec/yanartas-warp
