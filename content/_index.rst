@@ -51,6 +51,18 @@ An Ashen HSM is made up from the following parts:
   microcontroller connected to a Linux computer to use it as a tamper sensor. 
 * Under the Yanartas_ project, we will be creating a set of Ashen-compatible tamper sensors hardware modules
 
+Get Involved
+============
+
+Right now, the code is still in its early stages, but you can already try it out on your own. Currently, the only
+supported platform is Arduino Uno Q using debian Linux on the SoC with ashen-firmware running on the on-board STM32
+microcontroller. 
+
+To discuss the project and to ask questions, please join our `signal group
+<https://signal.group/#CjQKIF-_tl1MNxwXSaVg2Xi_6NgXUXnlBl_XCNJKdRSO4E_6EhCX_xbVzbdy3qQLIhmlZ6tO>`__.
+
+Issues are tracked `on github <https://github.com/yasec-de/ashen-issues/issues>`__.
+
 Project Roadmap
 ===============
 
@@ -70,5 +82,5 @@ reference hardware includes:
 .. _`fault injection`: https://tches.iacr.org/index.php/TCHES/article/view/7390/6562
 .. _probing: https://tches.iacr.org/index.php/TCHES/article/view/11802
 .. _ashen-linux: https://git.yasec.de/yasec/ashen-linux
-.. _ashen-firmware: https://git.yasec.de/yasec/ashen-fw
+.. _ashen-firmware: https://git.yasec.de/yasec/ashen-firmware
 .. _ashen-library: https://git.yasec.de/yasec/ashen-library

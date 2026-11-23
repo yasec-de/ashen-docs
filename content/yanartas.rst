@@ -138,6 +138,6 @@ continuity/short only mesh sensing connectors, which are simply passed through t
 .. _STM32U585: https://www.st.com/en/microcontrollers-microprocessors/stm32u575-585.html
 .. _conn-spec-30-pin: ./docs/connector-specs
 .. _ashen-linux: https://git.yasec.de/yasec/ashen-linux
-.. _ashen-firmware: https://git.yasec.de/yasec/ashen-fw
+.. _ashen-firmware: https://git.yasec.de/yasec/ashen-firmware
 .. _ashen-library: https://git.yasec.de/yasec/ashen-library
 .. _`Yanartas Pillowbox Generator`: https://git.yasec.de/yasec/yanartas-pillowbox-generator
