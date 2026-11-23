@@ -98,7 +98,7 @@ easily able to run ashen-firmware_. This board is a simple adapter between the U
 **Status:** In development, first prototype expected by end of November 2026.
 
 `proto-01-transparent: See-through Pillowbox Mesh Demo <https://git.yasec.de/yasec/yanartas-pillowbox-protos/src/branch/main/proto-01-transparent>`__
-------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------------------------------------------------
 
 `proto-01-transparent` is a see-through pillow box tamper sensing mesh made using the `Yanartas Pillowbox Generator`_.
 It's mostly for demonstration use, because you can see through it. It lacks the ground planes that would be necessary to
