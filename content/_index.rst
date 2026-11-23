@@ -76,6 +76,17 @@ reference hardware includes:
 4. Implementing a PKCS11 API on the Ashen/Yanartas tamper sensor.
 5. Implementing remote attestation support.
 
+Funding
+=======
+
+Part of this project (most of the software) has been funded by `Prototype Fund <https://www.prototypefund.de/>`__ as part of the `ashen project
+<https://www.prototypefund.de/projects/ashen>`__.
+
+Part of this project (most of the hardware) is being funded by `nlnet <https://nlnet.nl/>`_ in the `NGI0 Commons Fund
+<https://nlnet.nl/commonsfund/>`__ as part of the `Yanartas project <https://nlnet.nl/project/Yanartas/>`__.
+
+If you are interested in funding (part of) this project, please `reach out <mailto:ashen@yasec.de>`__.
+
 .. _`1981 lecture on US communications security`: https://archive.org/details/history_comsec_ii-nsa/history_comsec_ii-ISCAP
 .. _jaseg: https://jaseg.de/
 .. _Yanartas: https://nlnet.nl/project/Yanartas/
