@@ -16,10 +16,10 @@ Ashen provides APIs on three different levels of abstraction:
 
 1. An application-level interface through podman/crun integration that can be used to run OCI containers in a microVM
    that has its memory tagged for early wiping.
-2. Language bindings for python that allow you to run part of the code of an application inside a microVM whose memory
-   is automatically tagged.
-3. A low-level API that allows you to tag any ``mmap()``'ed allocation for early wiping using ``madvise()``. This
-   feature is integrated such that ``memfd_secret`` is tagged automatically.
+2. An extension to the standard ``madvise()`` syscall that allows you to tag secret memory areas for early wiping from
+   any systems programming language.
+3. A standard TPM 2.0 interface that you can use to roll your own key management schemes that offload important
+   cryptographic secrets to the ashen tamper sensing controller to keep them entirely out of Linux memory. 
 
 Secret MicroVM-Based Containers
 -------------------------------
