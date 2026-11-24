@@ -1,0 +1,16 @@
+{{- $pages := where .Pages "Params.bookHidden" "ne" true -}}
+{{- with $pages }}
+<ul>
+  {{- range . }}
+    {{- if .IsSection }}
+    <li>
+      {{- if .Content }}<a href="{{ .RelPermalink }}">{{ partial "docs/title" . }}</a>
+      {{- else }}{{ partial "docs/title" . }}{{ end }}
+      {{- partial "section-tree" . }}
+    </li>
+    {{- else if and .IsPage .Content }}
+    <li><a href="{{ .RelPermalink }}">{{ partial "docs/title" . }}</a></li>
+    {{- end }}
+  {{- end }}
+</ul>
+{{- end }}

@@ -1,0 +1,11 @@
+{{ define "main" }}
+  <article class="markdown book-article">
+    {{- .Content -}}
+    {{- if .Param "sectionToC" | default true }}
+    <nav class="section-toc">
+      <h3>Contents</h1>
+      {{ partial "section-tree" . }}
+    </nav>
+    {{- end }}
+  </article>
+{{ end }}
