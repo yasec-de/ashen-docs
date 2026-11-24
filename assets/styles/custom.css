@@ -29,3 +29,11 @@
   > :last-child  { margin-bottom: 0; }
   .admonition-title { font-weight: bold; }
 }
+
+/* Center images */
+
+.markdown img:not(p img) {
+  display: block;
+  margin: 0 auto;
+}
+

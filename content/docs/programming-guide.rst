@@ -24,12 +24,30 @@ Ashen provides APIs on three different levels of abstraction:
 Secret MicroVM-Based Containers
 -------------------------------
 
-The quickest way to tag an application's memory for early wipe is to run it as a container using podman's crun
-integration.
+The quickest way to tag an application's memory for early wipe is to run it as a VM using the ashen-modified krun
+runner.
 
-Python Language Bindings
+madvise kernel interface
 ------------------------
 
-Low-Level API
--------------
+On an ashen kernel build, madvise learns the new flag `MADV_CRASH_SECRET` that tags the given memory area for early
+wiping during a tamper alarm. You simply pass `madvise()` the base address of the memory area to be tagged, its length,
+and this flag.
+
+.. important::
+
+   The wipe mechanism only supports tagging full pages. Thus, make sure you only pass page-aligned memory areas into
+   `madvise()`. If you allocate a memory area through e.g. `mmap()`, it will naturally be page aligned, but if you
+   simply `malloc()` memory, you might not get page-aligned memory depending on your runtime.
+
+   To use `malloc()` with secret-tagged memory, you either have to hook your runtime to tag its heap whenever it grows
+   or shrinks, or you have to provide your own allocator on top of a larger mapping you ask the kenrnel for via
+   `mmap()`.
+
+TPM 2.0 Interface
+-----------------
+
+For quick and easy userspace integration, `ashen-firmware` embeds a firmware TPM, which the ashen kernel driver maps
+into the system. You can use this TPM to safely store cryptographic keys. `ashen-firmware` makes sure it deletes the TPM
+contents on a tamper alarm.
 

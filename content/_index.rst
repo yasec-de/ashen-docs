@@ -2,13 +2,24 @@
 title: "Ashen/Yanartas"
 ---
 
+.. image:: /images/ashen-logo-color-no-transparency.png
+   :alt: Ashen logo of a stylized flame in front of a red circle
+   :width: 150px
+
+The Ashen Open Source HSM Stack
+===============================
+
+In the Ashen project, we are building a full software stack for Open Source HSMs. Combined with the tamper sensing
+hardware that we are building in the Yanartas project, you will be able to build and program your own HSM from parts you
+trust, running open source software built on top of Linux.
+
 How do HSMs work
 ----------------
 
-We wrote above that a HSM "protects" a computer from hardware attacks. At first, you might think that you can just put
-the whole computer inside of a safe. However, in practice this doesn't really work because safes are in fact not very
-safe when the attacker has time and tools. As the US NSA's David G. Boak put it in his
-`1981 lecture on US communications security`_:
+A HSM is a device that protects a computer from advanced physical attacks. At first, you might think that you can just
+put the whole computer inside of a safe. However, in practice this doesn't really work because safes are in fact not
+very safe when the attacker has time and tools. As the US NSA's David G. Boak put it in his `1981 lecture on US
+communications security`_:
 
     One of our most intractable problems has been to find ways to package crypto-equipment in a way which will seriously
     deter penetration by a smart, well-equipped opponent with plenty of time. The difficulty is not much different than
@@ -60,6 +71,10 @@ microcontroller.
 
 To discuss the project and to ask questions, please join our `signal group
 <https://signal.group/#CjQKIF-_tl1MNxwXSaVg2Xi_6NgXUXnlBl_XCNJKdRSO4E_6EhCX_xbVzbdy3qQLIhmlZ6tO>`__.
+
+.. image:: /assets/ashen-signal-qr-red.png
+   :alt: Signal QR code leading to the group from above
+   :width: 150px
 
 Issues are tracked `on github <https://github.com/yasec-de/ashen-issues/issues>`__.
 
